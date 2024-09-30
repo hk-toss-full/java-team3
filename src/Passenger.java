@@ -1,5 +1,3 @@
-package src;
-
 // 현재층수, 목표층수 랜덤으로 넣어주는
 public class Passenger {
     private final int currentFloor;

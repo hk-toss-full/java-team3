@@ -1,10 +1,11 @@
-package src;
-
 public class Elevator {
     private Passenger[] passengers;
     private int currentFloor;
     private int passengerCount;
     private boolean isOpen;
+
+
+
     private boolean isEnter;
 
     public Elevator() {
@@ -21,6 +22,14 @@ public class Elevator {
 
     public int getPassengerCount() {
         return passengerCount;
+    }
+
+    public boolean getIsEnter() {
+        return isEnter;
+    }
+
+    public boolean getIsOpen() {
+        return isOpen;
     }
 
     public void setCurrentFloor(int currentFloor) {
@@ -66,5 +75,9 @@ public class Elevator {
 
     public Passenger[] getPassengers() {
         return passengers;
+    }
+
+    public boolean canTakePassenger() {
+        return passengerCount < 2;
     }
 }
