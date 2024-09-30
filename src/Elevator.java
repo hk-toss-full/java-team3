@@ -1,39 +1,36 @@
 public class Elevator {
-    private Passenger[] passengers;
+    private final Passenger[] passengers;
+
+
+
+    private Passenger[] allPassengers;
     private int currentFloor;
     private int passengerCount;
     private boolean isOpen;
-
-
-
     private boolean isEnter;
 
     public Elevator() {
         this.passengers = new Passenger[2];
-        this.currentFloor = (int)(Math.random() * 9) + 1;
+        this.currentFloor = (int)(Math.random() * 10) + 1;
         this.passengerCount = 0;
         this.isOpen = false;
         this.isEnter = true;
     }
 
     public int getCurrentFloor() {
-        return currentFloor;
+        return this.currentFloor;
     }
 
     public int getPassengerCount() {
         return passengerCount;
     }
 
-    public boolean getIsEnter() {
-        return isEnter;
+    public void upCurrentFloor(int currentFloor) {
+        this.currentFloor = currentFloor + 1;
     }
 
-    public boolean getIsOpen() {
-        return isOpen;
-    }
-
-    public void setCurrentFloor(int currentFloor) {
-        this.currentFloor = currentFloor;
+    public void downCurrentFloor(int currentFloor) {
+        this.currentFloor = currentFloor - 1;
     }
 
     public void setPassengerCount(int passengerCount) {
