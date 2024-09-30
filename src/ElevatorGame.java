@@ -40,10 +40,14 @@ public class ElevatorGame {
                 currTime += 3;
                 elevator.setTotalTime(currTime);
                 System.out.println(elevator.getTotalTime());
-                for(int i=0; i<elevator.getPassengerCount(); i++) {
-                    if(elevator.getPassengers()[i]==null) continue;
-                    if(elevator.getPassengers()[i].getTargetFloor() == elevator.getCurrentFloor())
-                        elevator.removePassenger(elevator.getPassengers()[i]);
+                for(int i=0; i<2; i++) {
+                    if(elevator.getPassengers()[i]==null) {
+                        continue;
+                    } else {
+                        if(elevator.getPassengers()[i].getTargetFloor() == elevator.getCurrentFloor())
+                            elevator.removePassenger(elevator.getPassengers()[i]);
+                    }
+
                 }
                 // 엘리베이터 정원 초과 여부 확인
                 if (elevator.getPassengerCount() == 2) {
@@ -51,8 +55,6 @@ public class ElevatorGame {
                 } else {
                     System.out.println("문열기");
                     boolean passengerFound = false;
-
-
 
                     loop:for(int i=0; i<2; i++){
                         if(elevator.getPassengerCount() == 2) break;

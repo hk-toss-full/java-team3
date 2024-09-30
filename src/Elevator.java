@@ -84,8 +84,10 @@ public class Elevator {
 
     public void removePassenger(Passenger passenger) {
         for (int i = 0; i < 2; i++) {
-            if(passengers[i]==null) continue;
-            if (passengers[i].getId().equals(passenger.getId())){
+            if(passengers[i]==null) {
+                continue;
+            }
+            else if(passengers[i].getId().equals(passenger.getId())){
                 passengers[i] = null;
                 System.out.println("승객이 내렸습니다");
                 passengerCount--;
