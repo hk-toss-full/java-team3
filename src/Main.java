@@ -11,7 +11,9 @@ public class Main {
         Passenger passenger3 = new Passenger();
         Passenger passenger4 = new Passenger();
         Passenger passenger5 = new Passenger();
-        elevator.addPassenger(passenger1);
+        Passenger[] passengers = {passenger1, passenger2, passenger3, passenger4, passenger5};
+
+        elevator.addPassenger(passenger3);
 
         while (true) {
             System.out.print("<1. 문열기, 2. 대기자 보기, 3. 이동하기> - 현재 층수 ");
@@ -32,11 +34,11 @@ public class Main {
             }
             if (inputData.equals("2")) {
                 System.out.println("대기자 보기");
-                System.out.println("1번째 대기자 (" + passenger1.getCurrentFloor() + "->" + passenger1.getTargetFloor() + ")");
-                System.out.println("2번째 대기자 (" + passenger2.getCurrentFloor() + "->" + passenger2.getTargetFloor() + ")");
-                System.out.println("3번째 대기자 (" + passenger3.getCurrentFloor() + "->" + passenger3.getTargetFloor() + ")");
-                System.out.println("4번째 대기자 (" + passenger4.getCurrentFloor() + "->" + passenger4.getTargetFloor() + ")");
-                System.out.println("5번째 대기자 (" + passenger5.getCurrentFloor() + "->" + passenger5.getTargetFloor() + ")");
+                for (int i = 0; i < passengers.length; i++) {
+                    if (passengers[i].isWaiting()) {
+                        System.out.println((i + 1) + "번 대기자 (" + passengers[i].getCurrentFloor() + "->" + passengers[i].getTargetFloor() + ")");
+                    }
+                }
             }
             if (inputData.equals("3")) {
                 System.out.println("<UP, DOWN>");

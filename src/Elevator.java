@@ -43,6 +43,7 @@ public class Elevator {
         for (int i = 0; i < 2; i++) {
             if (passengers[i] == null) {
                 passengers[i] = passenger;
+                passengers[i].setWaiting(false);
                 System.out.println("승객이 추가되었습니다: " + passenger);
                 passengerCount++;
                 return;
