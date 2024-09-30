@@ -8,7 +8,7 @@ public class Passenger {
     private boolean isPassengerInElevator;
 
     public Passenger() {
-        this.currentFloor = (int)(Math.random() * 9) + 1;
+        this.currentFloor = (int)(Math.random() * 10) + 1;
         this.targetFloor = generateTargetFloor(this.currentFloor);
         this.isWaiting = true;
         this.isPassengerInElevator = false;
@@ -17,7 +17,7 @@ public class Passenger {
     private int generateTargetFloor(int currentFloor) {
         int target;
         do {
-            target = (int)(Math.random() * 9) + 1;
+            target = (int)(Math.random() * 10) + 1;
         } while (target == currentFloor);
         return target;
     }

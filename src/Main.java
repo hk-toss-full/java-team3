@@ -13,7 +13,7 @@ public class Main {
         Passenger passenger5 = new Passenger();
         Passenger[] passengers = {passenger1, passenger2, passenger3, passenger4, passenger5};
 
-        elevator.addPassenger(passenger3);
+//        elevator.addPassenger(passenger3);
 
         while (true) {
             System.out.print("<1. 문열기, 2. 대기자 보기, 3. 이동하기> - 현재 층수 ");
@@ -57,6 +57,18 @@ public class Main {
                     }
                     System.out.println("내려갑니다.");
                 }
+            }
+            int check = 0;
+            for (Passenger passenger : passengers) {
+                if (!passenger.isWaiting()) {
+                    check++;
+                }
+            }
+            if (check == 5) {
+                System.out.println("게임을 종료합니다.");
+                System.out.println("-------------------------END-------------------------\n");
+                System.out.println("1. 걸린시간: ");
+                System.out.println("2. 최단시간: ");
             }
         }
     }

@@ -9,7 +9,7 @@ public class Elevator {
 
     public Elevator() {
         this.passengers = new Passenger[2];
-        this.currentFloor = (int)(Math.random() * 9) + 1;
+        this.currentFloor = (int)(Math.random() * 10) + 1;
         this.passengerCount = 0;
         this.isOpen = false;
         this.isEnter = true;
