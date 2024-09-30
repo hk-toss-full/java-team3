@@ -16,56 +16,82 @@ public class ElevatorGame {
 
     public void startGame() {
         while(true) {
+            if(elevator.getPassengerCount()!=0) {
+                System.out.println("==================");
+                System.out.println("탑승자 보기");
+                for (int i = 0; i < 2; i++) {
+                    if(elevator.getPassengers()[i]==null) continue;
+                    System.out.println(elevator.getPassengers()[i].getId() + "번 탑승자 (" + elevator.getPassengers()[i].getCurrentFloor() + "->" + elevator.getPassengers()[i].getTargetFloor() + ")");
+                }
+                System.out.println("==================");
+            }
+
+
             System.out.print("<1. 문열기, 2. 대기자 보기, 3. 이동하기> - 현재 층수 ");
             System.out.print(elevator.getCurrentFloor() + ", 총 정원 수 (");
             System.out.println(elevator.getPassengerCount() + "/2)");
 
             Scanner sc = new Scanner(System.in);
             String inputData = sc.nextLine();
-//            if (inputData.equals("1")) {
-//                if (elevator.getPassengerCount() == 2) {
-//                    System.out.println("<정원이 꽉 찼습니다. 더 태울 수 없습니다. 3초가 흘러갑니다.>");
-//                }
-//    //                if () {     // 누가 기다리고 있는지 어떻게 알지? 일단 "타고 내리는 사람 없는데 문 연 경우"
-//    //                    System.out.println("<현재 층에서 타거나 내리는 대기자가 없습니다. 3초가 흘러갑니다.>");
-//    //                }
-//                System.out.println("문열기");
-//
-//                System.out.println();
-//            }
+
 
             if (inputData.equals("1")) {
+                int currTime = elevator.getTotalTime();
+                currTime += 3;
+                elevator.setTotalTime(currTime);
+                System.out.println(elevator.getTotalTime());
+                for(int i=0; i<elevator.getPassengerCount(); i++) {
+                    if(elevator.getPassengers()[i]==null) continue;
+                    if(elevator.getPassengers()[i].getTargetFloor() == elevator.getCurrentFloor())
+                        elevator.removePassenger(elevator.getPassengers()[i]);
+                }
                 // 엘리베이터 정원 초과 여부 확인
                 if (elevator.getPassengerCount() == 2) {
                     System.out.println("<정원이 꽉 찼습니다. 더 태울 수 없습니다. 3초가 흘러갑니다.>");
                 } else {
                     System.out.println("문열기");
                     boolean passengerFound = false;
-                    for (Passenger passenger : passengers) {
-                        if (passenger.isWaiting() && passenger.getCurrentFloor() == elevator.getCurrentFloor()) {
-                            passengerFound = true;
-                            System.out.println("승객 번호 " + passenger.getId() + ": 현재 층 (" + passenger.getCurrentFloor() + ") -> 목적 층 (" + passenger.getTargetFloor() + ")");
-                        }
-                    }
 
-                    if (passengerFound) {
-                        System.out.println("태울 승객의 번호를 입력해주세요: ");
-                        int passengerChoice = sc.nextInt();
-                        sc.nextLine(); // 버퍼 비우기
 
-                        // 선택한 승객을 태움
+
+                    loop:for(int i=0; i<2; i++){
+                        if(elevator.getPassengerCount() == 2) break;
                         for (Passenger passenger : passengers) {
-                            if (passenger.getId().equals(Integer.toString(passengerChoice)) && passenger.isWaiting() && passenger.getCurrentFloor() == elevator.getCurrentFloor()) {
-                                elevator.addPassenger(passenger);
-                                passenger.setWaiting(false);
-                                System.out.println("승객 번호 " + passenger.getId() + "이 탑승했습니다.");
-                                System.out.println("승객을 더 태우시겠습니까?");
-                                break;
+                            if (passenger.isWaiting() && passenger.getCurrentFloor() == elevator.getCurrentFloor()) {
+                                passengerFound = true;
+                                System.out.println("승객 번호 " + passenger.getId() + ": 현재 층 (" + passenger.getCurrentFloor() + ") -> 목적 층 (" + passenger.getTargetFloor() + ")");
                             }
                         }
-                    } else {
-                        System.out.println("현재 층에 탑승 가능한 승객이 없습니다. 3초가 흘러갑니다.");
+
+                        if (passengerFound) {
+                            System.out.println("태울 승객의 번호를 입력해주세요: ");
+                            int passengerChoice = sc.nextInt();
+                            sc.nextLine(); // 버퍼 비우기
+
+
+                            // 선택한 승객을 태움
+                            for (Passenger passenger : passengers) {
+                                if (passenger.getId().equals(Integer.toString(passengerChoice)) && passenger.isWaiting() && passenger.getCurrentFloor() == elevator.getCurrentFloor()) {
+                                    elevator.addPassenger(passenger);
+                                    passenger.setWaiting(false);
+                                    System.out.println("승객 번호 " + passenger.getId() + "이 탑승했습니다.");
+                                    if (elevator.getPassengerCount() < 2) {
+                                        System.out.println("승객을 더 태우시겠습니까? yes/NO");
+                                        String isContinue = sc.nextLine();
+                                        if(isContinue.equalsIgnoreCase("NO")){
+                                            break loop;
+                                        }
+                                        passengerFound = false;
+                                    }
+                                    break;
+                                }
+                            }
+                        } else {
+                            System.out.println("현재 층에 탑승 가능한 승객이 없습니다. 3초가 흘러갑니다.");
+                            break;
+                        }
                     }
+
                 }
             }
 
@@ -103,7 +129,7 @@ public class ElevatorGame {
                     check++;
                 }
             }
-            if (check == 5) {
+            if (elevator.getPassengerCount()==0&&check == 5) {
                 ElevatorController controller = new ElevatorController(elevator, passengers);
                 int minTime = controller.getMinTime();
 

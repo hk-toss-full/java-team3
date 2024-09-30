@@ -45,12 +45,16 @@ public class Elevator {
 
     public void upCurrentFloor(int currentFloor) {
         this.currentFloor = currentFloor + 1;
-        totalTime+=1;
+        this.totalTime+=1;
     }
 
     public void downCurrentFloor(int currentFloor) {
         this.currentFloor = currentFloor - 1;
-        totalTime+=1;
+        this.totalTime+=1;
+    }
+
+    public void setTotalTime(int totalTime) {
+        this.totalTime = totalTime;
     }
 
     public void setPassengerCount(int passengerCount) {
@@ -70,7 +74,7 @@ public class Elevator {
             if (passengers[i] == null) {
                 passengers[i] = passenger;
                 passengers[i].setWaiting(false);
-                System.out.println("승객이 추가되었습니다: " + passenger);
+                System.out.println("승객이 추가되었습니다");
                 passengerCount++;
                 return;
             }
@@ -80,15 +84,17 @@ public class Elevator {
 
     public void removePassenger(Passenger passenger) {
         for (int i = 0; i < 2; i++) {
-            if (passenger.equals(passengers[i])) {
+            if(passengers[i]==null) continue;
+            if (passengers[i].getId().equals(passenger.getId())){
                 passengers[i] = null;
-                System.out.println("승객이 내렸습니다: " + passenger);
+                System.out.println("승객이 내렸습니다");
                 passengerCount--;
-                return;
             }
         }
         System.out.println("해당 승객은 엘리베이터에 없습니다.");
     }
+
+
 
     public Passenger[] getPassengers() {
         return passengers;
