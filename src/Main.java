@@ -19,6 +19,13 @@ public class Main {
 
             String inputData = sc.nextLine();
             if (inputData.equals("1")) {
+                if (elevator.getPassengerCount() == 2) {
+                    System.out.println("<정원이 꽉 찼습니다. 더 태울 수 없습니다. 3초가 흘러갑니다.>");
+                    continue;
+                }
+//                if () {     // 누가 기다리고 있는지 어떻게 알지? 일단 "타고 내리는 사람 없는데 문 연 경우"
+//                    System.out.println("<현재 층에서 타거나 내리는 대기자가 없습니다. 3초가 흘러갑니다.>");
+//                }
                 System.out.println("문열기");
                 System.out.println();
             }
@@ -32,10 +39,19 @@ public class Main {
             }
             if (inputData.equals("3")) {
                 System.out.println("<UP, DOWN>");
+                inputData = sc.nextLine();
                 if (inputData.equalsIgnoreCase("UP")) {
+                    if (elevator.getCurrentFloor() == 10) {
+                        System.out.println("<현재 층에서 올라갈 수 없습니다. 시간은 흐르지 않습니다.>");
+                        continue;
+                    }
                     System.out.println("올라갑니다.");
                 }
                 if (inputData.equalsIgnoreCase("DOWN")) {
+                    if (elevator.getCurrentFloor() == 1) {
+                        System.out.println("<현재 층에서 내려갈 수 없습니다. 시간은 흐르지 않습니다.>");
+                        continue;
+                    }
                     System.out.println("내려갑니다.");
                 }
             }
