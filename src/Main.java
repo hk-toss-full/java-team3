@@ -11,6 +11,7 @@ public class Main {
         Passenger passenger3 = new Passenger();
         Passenger passenger4 = new Passenger();
         Passenger passenger5 = new Passenger();
+        elevator.addPassenger(passenger1);
 
         while (true) {
             System.out.print("<1. 문열기, 2. 대기자 보기, 3. 이동하기> - 현재 층수 ");
