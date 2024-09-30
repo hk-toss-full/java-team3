@@ -9,16 +9,16 @@ public class Elevator {
 
     private int initFloor;
     private int passengerCount;
+    private int totalTime;
     private boolean isOpen;
     private boolean isEnter;
-
-
 
     public Elevator() {
         this.passengers = new Passenger[2];
         this.initFloor = (int)(Math.random() * 10) + 1;
         this.currentFloor = this.initFloor;
         this.passengerCount = 0;
+        this.totalTime = 0;
         this.isOpen = false;
         this.isEnter = true;
     }
@@ -31,8 +31,12 @@ public class Elevator {
         this.initFloor = initFloor;
     }
 
+    public int getTotalTime() {
+        return totalTime;
+    }
+
     public int getCurrentFloor() {
-        return this.currentFloor;
+        return currentFloor;
     }
 
     public int getPassengerCount() {
@@ -41,10 +45,12 @@ public class Elevator {
 
     public void upCurrentFloor(int currentFloor) {
         this.currentFloor = currentFloor + 1;
+        totalTime+=1;
     }
 
     public void downCurrentFloor(int currentFloor) {
         this.currentFloor = currentFloor - 1;
+        totalTime+=1;
     }
 
     public void setPassengerCount(int passengerCount) {
