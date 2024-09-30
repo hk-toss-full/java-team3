@@ -1,7 +1,7 @@
 package src;
 
 public class Elevator {
-    private Passenger[] passengers;
+    private final Passenger[] passengers;
     private int currentFloor;
     private int passengerCount;
     private boolean isOpen;
@@ -16,15 +16,19 @@ public class Elevator {
     }
 
     public int getCurrentFloor() {
-        return currentFloor;
+        return this.currentFloor;
     }
 
     public int getPassengerCount() {
         return passengerCount;
     }
 
-    public void setCurrentFloor(int currentFloor) {
-        this.currentFloor = currentFloor;
+    public void upCurrentFloor(int currentFloor) {
+        this.currentFloor = currentFloor + 1;
+    }
+
+    public void downCurrentFloor(int currentFloor) {
+        this.currentFloor = currentFloor - 1;
     }
 
     public void setPassengerCount(int passengerCount) {
@@ -66,5 +70,9 @@ public class Elevator {
 
     public Passenger[] getPassengers() {
         return passengers;
+    }
+
+    public boolean canTakePassenger() {
+        return passengerCount < 2;
     }
 }
