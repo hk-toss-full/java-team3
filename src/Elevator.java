@@ -5,16 +5,30 @@ public class Elevator {
 
     private Passenger[] allPassengers;
     private int currentFloor;
+
+
+    private int initFloor;
     private int passengerCount;
     private boolean isOpen;
     private boolean isEnter;
 
+
+
     public Elevator() {
         this.passengers = new Passenger[2];
-        this.currentFloor = (int)(Math.random() * 10) + 1;
+        this.initFloor = (int)(Math.random() * 10) + 1;
+        this.currentFloor = this.initFloor;
         this.passengerCount = 0;
         this.isOpen = false;
         this.isEnter = true;
+    }
+
+    public int getInitFloor() {
+        return initFloor;
+    }
+
+    public void setInitFloor(int initFloor) {
+        this.initFloor = initFloor;
     }
 
     public int getCurrentFloor() {
